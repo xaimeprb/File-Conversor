@@ -1,0 +1,10 @@
+<alumnos>
+  <alumno>
+    <id>1</id>
+    <nombre>Laura</nombre>
+  </alumno>
+  <alumno>
+    <id>2</id>
+    <nombre>Pepe</nombre>
+  </alumno>
+</alumnos>

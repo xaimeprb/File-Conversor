@@ -1,0 +1,3 @@
+alumno
+Id int 4
+Nombre string 20

@@ -1,47 +1,127 @@
-# Conversor de ficheros (TXT / DAT / PROPERTIES / XML) + CRUD DAT
+# Conversor de Ficheros (TXT / DAT / PROPERTIES / XML) + CRUD sobre DAT
 
-Pequeño proyecto para convertir entre formatos y gestionar un .dat de registros de tamaño fijo. Todo desde un menú por consola y con código simple.
+Proyecto en Java que permite convertir ficheros entre formatos y gestionar registros binarios de tamaño fijo (.dat) desde un menú por consola.  
+Incluye operaciones CRUD completas sobre archivos DAT con layout fijo.
 
-# Funcionalidades
 
-Menú principal para convertir a:
+## 📌 Características principales
 
-TXT • DAT • PROPERTIES • XML
+    - Menú interactivo por consola
+    - Conversión entre múltiples formatos
+    - CRUD completo sobre archivos `.dat`
+    - Parser de esquema para interpretar registros binarios
+    - Implementaciones usando `RandomAccessFile`, DOM y `Properties`
+    - Código sencillo, claro y orientado a DAM
 
-TXT
+## 📁 Formatos soportados
 
-TXT → TXT (copia)
+### **1. TXT**
 
-TXT → DAT (binario byte a byte)
+    - **TXT → TXT** (copia exacta línea a línea)
+    - **TXT → DAT** (copia binaria byte a byte)
+    - **TXT → PROPERTIES**
+    - Verifica formato `clave=valor`
+    - Si no cumple → avisa y NO convierte
 
-TXT → PROPERTIES (valida clave=valor)
+### **2. DAT (Registros de tamaño fijo)**
 
-DAT
+Layout fijo por defecto:
 
-CRUD sobre layout fijo:
-id (int 4 bytes) + nombre (20 bytes fijo, padding) + activo (boolean 1 byte)
+    id → int (4 bytes)
+    nombre → String fijo 20 bytes (padding con espacios)
+    activo → boolean (1 byte)
 
-DAT → TXT (con esquema)
+#### Operaciones CRUD disponibles
 
-DAT → PROPERTIES (pendiente según versión)
+    - **AÑADIR** registro
+    - **MODIFICAR** campo por id
+    - **BORRADO LÓGICO** (activo = false)
+    - **LEER** registro por id
 
-DAT → XML (DOM/XStream – pendiente según versión)
+#### Conversiones
 
-XML
+    - **DAT → TXT** (usando esquema)
+    - **DAT → PROPERTIES** (1 fichero por registro)
+    - **DAT → XML** (DOM – según versión)
 
-XML → TXT (DOM/SAX según versión)
+### **3. PROPERTIES**
 
-XML → PROPERTIES (un .properties por elemento hijo, solo etiquetas con valor)
+Se generan desde:
 
-XML → XML (clonado DOM)
+    - TXT válido (`clave=valor`)
+    - DAT (1 `.properties` por registro)
+    - XML (solo etiquetas con valor)
 
-XML → DAT (pendiente según versión)
+### **4. XML**
 
-Esquema de registros
+    - **XML → TXT** (DOM/SAX según implementación)
+    - **XML → PROPERTIES** (un `.properties` por elemento hijo)
+    - **XML → XML** (clonado usando DOM)
+    - **XML → DAT** (pendiente según versión)
 
-Parser sencillo (asumiendo formato correcto) para líneas del tipo:
+## 📘 Esquema de Registros (.txt)
 
-alumno
-Id int 4
-Nombre string 20
+    Para poder interpretar un `.dat` se necesita un archivo de esquema, ya que el binario no contiene metadatos.
 
+### Formato esperado:
+
+    Alumno
+    id int 4
+    nombre String 20
+    activo int 1
+
+El programa obtiene de aquí:
+
+    - nombre de entidad
+    - lista de campos
+    - tipo de dato (`int` / `String`)
+    - tamaño en bytes
+
+Esquema obligatorio para:
+
+    - **DAT → TXT**
+    - **DAT → XML**
+    - **DAT → PROPERTIES**
+    - **CRUD DAT**
+
+## 🧩 Arquitectura del Proyecto
+
+    src/main/java/com/mycompany/proyectojaime/
+    │
+    ├── app/
+    │ └── ProyectoJaime.java → Menú principal (main)
+    │
+    ├── conversor/
+    │ └── FileConversor.java → Métodos de conversión entre formatos
+    │
+    ├── dat/
+    │ ├── DATController.java → CRUD DAT y utilidades RAF
+    │ ├── EsquemaRegistro.java → Representa el esquema
+    │ ├── CampoDefinicion.java → Campo de un registro
+    │ └── TipoCampo.java → Tipos admitidos
+
+## Ejecución
+
+    1. Ejecutar `ProyectoJaime`
+    2. Introducir ruta del archivo a convertir
+    3. Si es `.dat`, indicar si el esquema es conocido
+    4. Elegir tipo de salida desde el menú
+    5. Introducir nombre del nuevo fichero
+
+
+
+## Ficheros de prueba recomendados
+
+    datos/
+    ├── alumnos.dat
+    ├── esquema_alumno.txt
+    ├── personas.xml
+    ├── config.txt
+    ├── malo.txt
+    └── ejemplo.properties
+
+
+## 📝 Autor
+
+    **Jaime Pérez Roget Blanco**
+    08/10/2025

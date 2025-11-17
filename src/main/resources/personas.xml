@@ -1,0 +1,10 @@
+<personas>
+    <persona>
+        <nombre>Pepito</nombre>
+        <edad>21</edad>
+    </persona>
+    <persona>
+        <nombre>Grillo</nombre>
+        <edad>30</edad>
+    </persona>
+</personas>

@@ -11,7 +11,6 @@ Incluye operaciones CRUD completas sobre archivos DAT con layout fijo.
     - CRUD completo sobre archivos `.dat`
     - Parser de esquema para interpretar registros binarios
     - Implementaciones usando `RandomAccessFile`, DOM y `Properties`
-    - Código sencillo, claro y orientado a DAM
 
 ## 📁 Formatos soportados
 
@@ -21,7 +20,7 @@ Incluye operaciones CRUD completas sobre archivos DAT con layout fijo.
     - **TXT → DAT** (copia binaria byte a byte)
     - **TXT → PROPERTIES**
     - Verifica formato `clave=valor`
-    - Si no cumple → avisa y NO convierte
+    - Si no cumple avisa y no convierte
 
 ### **2. DAT (Registros de tamaño fijo)**
 

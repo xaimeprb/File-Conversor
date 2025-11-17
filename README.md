@@ -123,5 +123,5 @@ Esquema obligatorio para:
 
 ## 📝 Autor
 
-    **Jaime Pérez Roget Blanco**
-    08/10/2025
+**Jaime Pérez Roget Blanco**
+08/10/2025
